@@ -93,4 +93,9 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     get story_path(stories(:one))
     assert_select 'p.submitted_by span', 'Glenn Goodrich'
   end
+
+  test "story index is default" do
+    assert_recognizes({ controller: "stories",
+                        action: "index" }, "/")
+  end  
 end
