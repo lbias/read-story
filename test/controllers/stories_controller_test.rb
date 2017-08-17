@@ -13,6 +13,18 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     assert response.body.include?(stories(:two).name)
   end
 
+  test "shows story on index" do
+    get stories_path
+    assert_select 'h2', 'Showing 1 front-page story'
+    assert_select 'div#content div.story', count: 1
+  end
+
+  test "show stories in bin" do
+    get bin_stories_path
+    assert_select 'h2', 'Showing 2 upcoming stories'
+    assert_select 'div#content div.story', count: 2
+  end
+
   test "gets new story form" do
     login_user
     get new_story_path
@@ -97,5 +109,5 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
   test "story index is default" do
     assert_recognizes({ controller: "stories",
                         action: "index" }, "/")
-  end  
+  end
 end
