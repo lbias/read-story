@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
   before_action :ensure_login, only: [ :new, :create ]
 
   def index
-    @story = Story.popular
+    @stories = Story.popular
   end
 
   def new
