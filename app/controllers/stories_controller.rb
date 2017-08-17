@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
   before_action :ensure_login, only: [ :new, :create ]
 
   def index
-    @story = Story.where('votes_count >= 5').order('id DESC')
+    @story = fetch_stories('votes_count >= 5')
   end
 
   def new
@@ -23,7 +23,18 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
   end
 
+  def bin
+    @stories = fetch_stories("votes_count < 5")
+    render action: "index"
+  end
+
+  protected
+
   def story_params
     params.require(:story).permit(:name, :link)
+  end
+
+  def fetch_stories(conditions)
+    @stories = Story.where(conditions).order('id DESC')
   end
 end

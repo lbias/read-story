@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   resources :stories do
     resources :votes
+    collection do
+      get 'bin'
+    end
   end
 
   resource :session
