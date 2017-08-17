@@ -79,11 +79,17 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show story vote elements" do
+    login_user
     get story_path(stories(:one))
     assert_select 'h2 span#vote_score'
     assert_select 'ul#vote_history li', count: 2
     assert_select 'div#vote_form form'
   end
+
+  test "does not show vote button if not logged in" do
+    get story_path(stories(:one))
+    assert_select 'div#vote_link', false
+  end  
 
   test "indicates not logged in" do
     get stories_path
