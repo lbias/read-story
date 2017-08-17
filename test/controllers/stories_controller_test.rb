@@ -89,7 +89,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
   test "does not show vote button if not logged in" do
     get story_path(stories(:one))
     assert_select 'div#vote_link', false
-  end  
+  end
 
   test "indicates not logged in" do
     get stories_path
@@ -98,7 +98,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "show navigation menu" do
     get stories_path
-    assert_select 'ul#navigation li', 2
+    assert_select 'ul#navigation li', 3
   end
 
   test "redirects if not logged in" do
