@@ -1,6 +1,17 @@
 require 'test_helper'
 
 class StoriesControllerTest < ActionDispatch::IntegrationTest
+  test "gets stories" do
+    get stories_path
+    assert_response :success
+    assert response.body.include?(stories(:promoted).name)
+  end
+
+  test "gets bin" do
+    get bin_stories_path
+    assert_response :success
+    assert response.body.include?(stories(:two).name)
+  end
 
   test "gets new story form" do
     login_user
