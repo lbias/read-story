@@ -41,5 +41,11 @@ class StoryTest < ActiveSupport::TestCase
     stories(:two).votes.create(user: users(:glenn))
     stories(:two).reload
     assert_equal 1, stories(:two).attributes['votes_count']
-  end  
+  end
+
+  test "decrements votes counter cache" do
+    stories(:one).votes.first.destroy
+    stories(:one).reload
+    assert_equal 1, stories(:one).attributes['votes_count']
+  end
 end
