@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   end
 
   resource :session
+
+  resources :users
 end
