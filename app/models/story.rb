@@ -3,6 +3,8 @@ class Story < ApplicationRecord
 
   after_create :create_initial_vote
 
+  acts_as_taggable
+
   belongs_to :user
   has_many :votes do
     def latest
@@ -21,5 +23,5 @@ class Story < ApplicationRecord
 
   def create_initial_vote
     votes.create user: user
-  end  
+  end
 end
