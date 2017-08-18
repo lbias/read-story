@@ -56,5 +56,12 @@ class StoryTest < ActiveSupport::TestCase
       user: users(:glenn)
     )
     assert_equal users(:glenn), s.votes.first.user
+  end
+
+  test "is taggable" do
+    stories(:one).tag_list = 'blog, ruby'
+    stories(:one).save
+    assert_equal 2, stories(:one).tags.size
+    assert_equal [ 'blog', 'ruby' ], stories(:one).tag_list
   end  
 end
