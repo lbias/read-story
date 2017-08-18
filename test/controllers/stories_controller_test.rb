@@ -111,4 +111,14 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     get story_path(stories(:one))
     assert_select 'p.submitted_by span a', 'Glenn Goodrich'
   end
+
+  test "add story with tags" do
+    login_user
+    post stories_path, story: {
+        name: "story with tags",
+        link: "http://www.story-with-tags.com/",
+        tag_list: "rails, blog"
+    }
+    assert_equal [ 'rails', 'blog' ], assigns(:story).tag_list
+  end
 end
