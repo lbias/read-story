@@ -29,7 +29,7 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     login_user
     get new_story_path
     assert_response :success
-    assert_select 'form p', count: 3
+    assert_select 'form p', count: 4
   end
 
   test "adds a story" do
